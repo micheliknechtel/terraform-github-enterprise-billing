@@ -1,0 +1,15 @@
+# Terraform state contains credentials in plaintext. Never commit it.
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.tfstate.lock.info
+crash.log
+crash.*.log
+
+# Real variable files hold enterprise names and sometimes tokens.
+# Only the .example file belongs in version control.
+*.tfvars
+!*.tfvars.example
+
+# Local provider binaries
+bin/

@@ -1,0 +1,43 @@
+enterprise   = "acme"
+api_base_url = "https://api.SUBDOMAIN.ghe.com"
+# github_token = set via TF_VAR_github_token, never commit it
+
+cost_centers = {
+  platform = {
+    name             = "ACME-Platform"
+    enterprise_teams = ["acme-platform-engineering"]
+  }
+
+  data = {
+    name          = "ACME-Data"
+    organizations = ["acme-data"]
+  }
+}
+
+budgets = {
+  platform_copilot = {
+    scope       = "cost_center"
+    cost_center = "platform"
+
+    budget_type = "SkuPricing"
+    product_sku = "copilot_ai_credit"
+    amount      = 1000
+
+    prevent_further_usage = true
+    alert                 = true
+    alert_recipients      = ["finops"]
+  }
+
+  data_actions = {
+    scope       = "cost_center"
+    cost_center = "data"
+
+    budget_type = "ProductPricing"
+    product_sku = "actions"
+    amount      = 5000
+
+    prevent_further_usage = false
+    alert                 = true
+    alert_recipients      = ["finops"]
+  }
+}
